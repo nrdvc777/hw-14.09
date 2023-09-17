@@ -1,18 +1,19 @@
 from django.shortcuts import render
 from .models import TodoModel
 from .serializers import TodoSerializer
-from rest_framework.status import HTTP_204_NO_CONTENT
-from rest_framework import views
-from rest_framework.response import Response
 from rest_framework import generics
-
+from rest_framework.permissions import IsAuthenticated
 class AllTodoView(generics.ListAPIView):
     queryset = TodoModel.objects.all()
     serializer_class = TodoSerializer
+    permission_classes = (IsAuthenticated,)
+
 
 class CreateTodoView(generics.ListCreateAPIView):
     queryset = TodoModel.objects.all()
     serializer_class = TodoSerializer
+    permission_classes = (IsAuthenticated,)
+
 
 # class DeleteToddoView(generics.RetrieveDestroyAPIView):
 #     queryset = TodoModel.objects.all()
